@@ -55,7 +55,7 @@ public class Percolation {
             int left, right, up, down;
             if (col != 1) {
                 // left = (row - 1) * size + (col - 1);
-                left = indexMapping(row, col - 1);
+                left = indexMapping(row, col - 1);  // stick to the modular programming!
                 if (open[left]) {
                     uf.union(index, left);
                 }
