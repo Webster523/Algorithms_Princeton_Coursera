@@ -54,14 +54,16 @@ public class Percolation {
             // connect 'this' site to all of its adjacent open sites
             int left, right, up, down;
             if (col != 1) {
-                left = (row - 1) * size + (col - 1);
+                // left = (row - 1) * size + (col - 1);
+                left = indexMapping(row, col - 1);  // stick to the modular programming!
                 if (open[left]) {
                     uf.union(index, left);
                 }
             }
 
             if (col != size) {
-                right = (row - 1) * size + (col + 1);
+                // right = (row - 1) * size + (col + 1);
+                right = indexMapping(row, col + 1);
                 if (open[right]) {
                     uf.union(index, right);
                 }
@@ -71,7 +73,8 @@ public class Percolation {
                 up = 0;
             }
             else {
-                up = (row - 2) * size + col;
+                // up = (row - 2) * size + col;
+                up = indexMapping(row - 1, col);
             }
             if (open[up]) {
                 uf.union(index, up);
@@ -82,7 +85,8 @@ public class Percolation {
                 down = open.length - 1;
             }
             else {
-                down = row * size + col;
+                // down = row * size + col;
+                down = indexMapping(row + 1, col);
             }
             if (open[down]) {
                 uf.union(index, down);
@@ -116,6 +120,13 @@ public class Percolation {
     // returns the number of open sites
     public int numberOfOpenSites() {
         return cntOpen;
+    // The spec requires that all instance methods constant time, so just maintain a cntOpen variable.
+    //     int count = 0;
+    //     for (int i = 1; i < open.length - 1; i++) {
+    //         if (open[i])
+    //         count++;
+    //     }
+    //     return count;
     }
 
     // does the system percolate?
