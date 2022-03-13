@@ -8,6 +8,10 @@ import java.util.Arrays;
 public class FastCollinearPoints {
     private final ArrayList<LineSegment> lineSegments;
 
+    // Note: The WeightedQuickUnionUF - an implementation of union-set data structure cannot be used as helper,
+    // since the transitive does not hold for the collinear relation.
+    // (i.e., p is collinear to q and q is collinear to w. ×××-> p is collinear to w.)
+
     // finds all line segments containing 4 or more points
     public FastCollinearPoints(Point[] points) {
         // test for corner case 1 - the argument to the constructor is null
@@ -131,32 +135,4 @@ public class FastCollinearPoints {
         return copy;
     }
 
-    // public static void main(String[] args) {
-    //     // read the n points from a file
-    //     In in = new In(args[0]);
-    //     int n = in.readInt();
-    //     Point[] points = new Point[n];
-    //     for (int i = 0; i < n; i++) {
-    //         int x = in.readInt();
-    //         int y = in.readInt();
-    //         points[i] = new Point(x, y);
-    //     }
-    //
-    //     // draw the points
-    //     StdDraw.enableDoubleBuffering();
-    //     StdDraw.setXscale(0, 32768);
-    //     StdDraw.setYscale(0, 32768);
-    //     for (Point p : points) {
-    //         p.draw();
-    //     }
-    //     StdDraw.show();
-    //
-    //     // print and draw the line segments
-    //     FastCollinearPoints collinear = new FastCollinearPoints(points);
-    //     for (LineSegment segment : collinear.segments()) {
-    //         StdOut.println(segment);
-    //         segment.draw();
-    //     }
-    //     StdDraw.show();
-    // }
 }
